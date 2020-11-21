@@ -4,12 +4,28 @@ import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { Redirect } from 'react-router-dom'
 import moment from 'moment';
+import { addHelper } from '../../store/actions/projectActions'
 
 const ProjectDetails = (props) => {
   const { project, auth } = props;
-  if (!auth.uid) return <Redirect to='/signin' /> 
+  if (!auth.uid) return <Redirect to='/signin' />
+
+  function submitAddHelper() {
+    props.addHelper(props.match.params.id, project);
+    props.history.push('/');
+  }
 
   if (project) {
+    const endButton = project.authorId !== auth.uid ? (
+      project.helpers.length && (project.helpers.find(x => x.email === auth.email)) !== undefined ? (
+        <> </>
+      ):(
+        <a className="waves-effect waves-light btn-small my-orange" onClick={submitAddHelper}>Be Accountable</a>
+      )
+    ):(
+      <></>
+    )
+
     return (
       <div className="container section project-details">
         <div className="card z-depth-0">
@@ -18,8 +34,14 @@ const ProjectDetails = (props) => {
             <p>{project.content}</p>
           </div>
           <div className="card-action grey lighten-4 grey-text">
-            <div>Posted by {project.authorFirstName} {project.authorLastName}</div>
-            <div>{moment(project.createdAt.toDate()).calendar()}</div>
+          <div className="row">
+            <div className="col s9">
+              <div>Posted by {project.authorFirstName} {project.authorLastName}</div>
+              <div>{moment(project.createdAt.toDate()).calendar()}</div>
+              <div># Crewmembers helping: {project.helpers.length}</div>
+            </div>
+            <div className="col s3">{endButton}</div>
+          </div>
           </div>
         </div>
       </div>
@@ -43,8 +65,14 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    addHelper: (id, project) => dispatch(addHelper(id, project))
+  }
+}
+
 export default compose(
-  connect(mapStateToProps),
+  connect(mapStateToProps, mapDispatchToProps),
   firestoreConnect(props => [
     { collection : "projects", doc: props.match.params.id }
   ])

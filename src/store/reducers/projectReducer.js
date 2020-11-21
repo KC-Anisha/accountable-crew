@@ -1,8 +1,8 @@
 const initState = {
     projects: [
-      {id: '1', title: 'help me find peach', content: 'blah blah blah'},
-      {id: '2', title: 'collect all the stars', content: 'blah blah blah'},
-      {id: '3', title: 'egg hunt with yoshi', content: 'blah blah blah'}
+      {id: '1', title: 'Look at me', content: 'I am Mr. Meeseeks'},
+      {id: '2', title: 'Waba laba dub dub', content: 'blah blah blah'},
+      {id: '3', title: 'Time to get shwifty', content: 'blah blah blah'}
     ]
   }
   
@@ -13,6 +13,12 @@ const initState = {
         return state;
       case 'CREATE_PROJECT_ERROR':
         console.log('create project error');
+        return state;
+      case 'ADD_HELPER_SUCCESS':
+        console.log('add helper success');
+        return state;
+      case 'ADD_HELPER_ERROR':
+        console.log('add helper error');
         return state;
       default:
         return state;
