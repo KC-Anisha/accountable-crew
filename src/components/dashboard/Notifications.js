@@ -4,7 +4,8 @@ import '../../App.css'
 const Notifications = () => {
   return (
     <div>
-      <p className="text">Notifications</p>
+      <p className="text">Crewmates you're helping</p>
+      <p className="text">Crewmates helping you</p>
     </div>
   )
 }

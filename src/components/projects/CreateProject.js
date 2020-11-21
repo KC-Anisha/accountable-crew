@@ -28,14 +28,14 @@ class CreateProject extends Component {
     return (
       <div className="container" style={{marginTop: '15px'}}>
         <form className="white" style={{padding: '30px'}} onSubmit={this.handleSubmit}>
-          <h5 className="grey-text text-darken-3">Create a New Project</h5>
+          <h5 className="grey-text text-darken-3">Create a New Goal</h5>
           <div className="input-field">
             <input type="text" id='title' onChange={this.handleChange} />
-            <label htmlFor="title">Project Title</label>
+            <label htmlFor="title">Goal Title</label>
           </div>
           <div className="input-field">
             <textarea id="content" className="materialize-textarea" onChange={this.handleChange}></textarea>
-            <label htmlFor="content">Project Content/Details</label>
+            <label htmlFor="content">Goal/Assignment Details</label>
           </div>
           <div className="input-field">
             <button className="btn my-orange">Create</button>
