@@ -4,7 +4,7 @@ import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { Redirect } from 'react-router-dom'
 import moment from 'moment';
-import { addHelper } from '../../store/actions/projectActions'
+import { addHelper, completeProject } from '../../store/actions/projectActions'
 
 const ProjectDetails = (props) => {
   const { project, auth } = props;
@@ -12,6 +12,11 @@ const ProjectDetails = (props) => {
 
   function submitAddHelper() {
     props.addHelper(props.match.params.id, project);
+    props.history.push('/');
+  }
+
+  function deleteProject() {
+    props.completeProject(props.match.params.id);
     props.history.push('/');
   }
 
@@ -23,7 +28,7 @@ const ProjectDetails = (props) => {
         <a className="waves-effect waves-light btn-small my-orange" onClick={submitAddHelper}>Be Accountable</a>
       )
     ):(
-      <></>
+      <a className="waves-effect waves-light btn-small my-orange" onClick={deleteProject}>Completed Goal</a>
     )
 
     return (
@@ -67,7 +72,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addHelper: (id, project) => dispatch(addHelper(id, project))
+    addHelper: (id, project) => dispatch(addHelper(id, project)),
+    completeProject: (id) => dispatch(completeProject(id))
   }
 }
 

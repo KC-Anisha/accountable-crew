@@ -27,13 +27,25 @@ export const addHelper = (id, project) => {
     let actualHelpers = getState().firestore.data.projects[id].helpers;
     const addUser = {email: email, name: name}
     let updatedHelpers = [...actualHelpers, addUser];
-    console.log(updatedHelpers)
     firestore.collection('projects').doc(id).update({
       helpers: updatedHelpers
     }).then(() => {
       dispatch({ type: 'ADD_HELPER_SUCCESS' });
     }).catch(err => {
       dispatch({ type: 'ADD_HELPER_ERROR' }, err);
+    });
+  }
+};
+
+export const completeProject = (id) => {
+  return (dispatch, getState, {getFirestore}) => {
+    const firestore = getFirestore();
+
+    firestore.delete({ collection: 'projects', doc:`${id}` 
+    }).then(() => {
+      dispatch({ type: 'COMPLETE_PROJECT_SUCCESS' });
+    }).catch(err => {
+      dispatch({ type: 'COMPLETE_PROJECT_ERROR' }, err);
     });
   }
 };

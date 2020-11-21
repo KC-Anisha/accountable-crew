@@ -20,6 +20,12 @@ const initState = {
       case 'ADD_HELPER_ERROR':
         console.log('add helper error');
         return state;
+      case 'COMPLETE_PROJECT_SUCCESS':
+        console.log('complete project success');
+        return state;
+      case 'COMPLETE_PROJECT_ERROR':
+        console.log('complete project error');
+        return state;
       default:
         return state;
     }
