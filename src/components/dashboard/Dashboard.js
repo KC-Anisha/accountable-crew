@@ -18,7 +18,7 @@ class Dashboard extends Component {
             <ProjectList projects={projects} />
           </div>
           <div className="col s12 m5 offset-m1">
-            <Notifications projects={projects}/>
+            <Notifications projects={projects} userEmail={auth.email} userId={auth.uid}/>
           </div>
         </div>
       </div>
