@@ -21,15 +21,20 @@ const store = createStore(rootReducer,
   )
 );
 
+const rrfConfig = {
+  userProfile: 'users',
+  useFirestoreForProfile: true
+}
+
 const rrfProps = {
   firebase,
-  config: fbConfig,
+  config: rrfConfig,
   dispatch: store.dispatch,
   createFirestoreInstance,
-  userProfile: 'users', // where profiles are stored in database
-  presence: 'presence', // where list of online users is stored in database
+  presence: 'presence',
   sessions: 'sessions'
-};
+}
+
 
 function AuthIsLoaded({ children }) {
   const auth = useSelector(state => state.firebase.auth)
